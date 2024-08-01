@@ -26,6 +26,12 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Requirement says to use PostgreSql
+gem 'pg', '>= 0.18', '< 2.0'
+
+# need to use .env file 
+gem 'dotenv-rails', groups: [:development, :test]
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
