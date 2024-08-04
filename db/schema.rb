@@ -10,8 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 0) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_01_231300) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "contact_email"
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "press_releases", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "publish_date"
+    t.bigint "users_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "publisher_id", null: false
+    t.index ["publisher_id"], name: "index_press_releases_on_publisher_id"
+    t.index ["users_id"], name: "index_press_releases_on_users_id"
+  end
+
+  create_table "publishers", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "website_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "role"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "press_releases", "publishers"
+  add_foreign_key "press_releases", "users", column: "users_id"
 end

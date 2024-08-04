@@ -32,6 +32,10 @@ gem 'pg', '>= 0.18', '< 2.0'
 # need to use .env file 
 gem 'dotenv-rails', groups: [:development, :test]
 
+#for secured password
+gem 'bcrypt', '~> 3.1.7'
+
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

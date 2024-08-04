@@ -1,6 +1,6 @@
 class Publisher < ApplicationRecord
 
-  has_many :press_releases
+  has_many :PressRelease
 
   validates :name, :description, presence: true
 end
