@@ -34,7 +34,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 #for secured password
 gem 'bcrypt', '~> 3.1.7'
-
+#devise for authentication
+gem 'devise'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
