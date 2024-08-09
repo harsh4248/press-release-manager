@@ -1,0 +1,19 @@
+<%# <h1>Organizations#index</h1>
+<p>Find me in app/views/organizations/index.html.erb</p> %>
+
+<% if current_user.organizations.exists? %>
+  <h1>Your Organization</h1>
+  <p>Name: <%= current_user.organizations.first.name %></p>
+  <p>Description: <%= current_user.organizations.first.description %></p>
+  <%= link_to 'Edit', edit_organization_path(@organization) %>
+
+<% else %>
+  <h1>You don't have an organization yet</h1>
+  <%= link_to 'Create Organization', new_organization_path %>
+<% end %>
+
+
+
+
+
+

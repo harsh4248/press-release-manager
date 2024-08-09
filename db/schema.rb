@@ -10,9 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_08_211223) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_09_155059) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "contact_email"
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+  end
+
+  create_table "organizations_publishers", id: false, force: :cascade do |t|
+    t.bigint "publisher_id", null: false
+    t.bigint "organization_id", null: false
+    t.index ["organization_id", "publisher_id"], name: "idx_on_organization_id_publisher_id_10ad02e4ee"
+    t.index ["publisher_id", "organization_id"], name: "idx_on_publisher_id_organization_id_e485ebfc35"
+  end
+
+  create_table "organizations_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "organization_id", null: false
+    t.index ["organization_id", "user_id"], name: "index_organizations_users_on_organization_id_and_user_id"
+    t.index ["user_id", "organization_id"], name: "index_organizations_users_on_user_id_and_organization_id"
+  end
+
+  create_table "press_releases", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "publish_date"
+    t.bigint "user_id", null: false
+    t.bigint "publisher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organization_id", null: false
+    t.index ["organization_id"], name: "index_press_releases_on_organization_id"
+    t.index ["publisher_id"], name: "index_press_releases_on_publisher_id"
+    t.index ["user_id"], name: "index_press_releases_on_user_id"
+  end
+
+  create_table "publishers", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "website_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,4 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_08_211223) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "press_releases", "organizations"
+  add_foreign_key "press_releases", "publishers"
+  add_foreign_key "press_releases", "users"
 end
