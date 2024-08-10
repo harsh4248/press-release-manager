@@ -29,7 +29,7 @@
 
   <div class="field">
     <%= form.label :organization_id %>
-    <%= form.collection_select :organization_id, current_user.organizations, :id, :name, prompt: "Select an Organization" %>
+    <%= form.collection_select :organization_id, Organization.all, :id, :name, prompt: "Select an Organization" %>
   </div>
 
   <div class="actions">
@@ -37,4 +37,4 @@
   </div>
 <% end %>
 
-<%= link_to 'Back to Publisher', publisher_path(@publisher) %>
+<%= link_to 'Back to Publisher', publishers_path %>

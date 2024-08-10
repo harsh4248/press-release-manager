@@ -1,4 +1,6 @@
 class OrganizationsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :check_if_organization
   def index
     if current_user.organizations.exists?
       @organization = current_user.organizations.first
@@ -36,6 +38,10 @@ class OrganizationsController < ApplicationController
   end
 
   private
+
+  def check_if_organization
+    redirect_to root_path, alert: "Access denied." unless current_user.organization?
+  end
 
   def organization_params
     params.require(:organization).permit(:name, :description, :contact_email, :phone_number)

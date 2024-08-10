@@ -1,4 +1,7 @@
 class PublishersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :check_if_publisher
+
   def index
     if current_user.publishers.exists?
       @publisher = current_user.publishers.first 
@@ -57,6 +60,10 @@ class PublishersController < ApplicationController
 
   private
 
+  def check_if_publisher
+    redirect_to root_path, alert: "Access denied." unless current_user.publisher?
+  end
+
   def publisher_params
     params.require(:publisher).permit(:name, :description, :website_url)
   end
@@ -64,4 +71,5 @@ class PublishersController < ApplicationController
   def press_release_params
     params.require(:press_release).permit(:title, :content, :publish_date, :organization_id)
   end
+
 end
