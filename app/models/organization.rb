@@ -4,9 +4,9 @@ class Organization < ApplicationRecord
   # has_many :publishers
   # has_many :users
   # belongs_to :users
-  has_and_belongs_to_many :users
-  has_and_belongs_to_many :publishers
-  has_many :organizations
+  belongs_to :user
+  # has_many :publishers
+  # has_many :users
   
   before_create :set_created_at
   before_update :set_updated_at

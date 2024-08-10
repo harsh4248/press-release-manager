@@ -2,7 +2,7 @@ class OrganizationsController < ApplicationController
   def index
     if current_user.organizations.exists?
       @organization = current_user.organizations.first
-      @publishers = @organization.publishers
+      # @publishers = @organization.publishers
       # @press_releases = @organization.press_releases
     else
       redirect_to new_organization_path
@@ -14,8 +14,9 @@ class OrganizationsController < ApplicationController
 
   def create
     @organization = current_user.organizations.build(organization_params)
+    @organization.user_id = current_user.id
     if @organization.save
-      redirect_to organization_path(@organization), notice: "Organization created successfully."
+      redirect_to organizations_url, notice: "Organization created successfully."
     else
       render :new
     end

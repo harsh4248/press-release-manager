@@ -1,0 +1,40 @@
+<h1>Create New Press Release</h1>
+
+<%= form_with(model: [@publisher, @press_release], url: create_press_release_publisher_path(@publisher), local: true) do |form| %>
+  <% if @press_release.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@press_release.errors.count, "error") %> prohibited this press release from being saved:</h2>
+      <ul>
+        <% @press_release.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :publish_date %>
+    <%= form.datetime_select :publish_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :organization_id %>
+    <%= form.collection_select :organization_id, current_user.organizations, :id, :name, prompt: "Select an Organization" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create Press Release" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Publisher', publisher_path(@publisher) %>

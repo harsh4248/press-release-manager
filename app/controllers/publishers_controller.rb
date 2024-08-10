@@ -1,7 +1,14 @@
 class PublishersController < ApplicationController
   def index
-    @publisher = current_user.publishers.first 
-    @press_releases = @publisher.press_releases
+    if current_user.publishers.exists?
+      @publisher = current_user.publishers.first 
+      @press_releases = @publisher.press_releases
+    else
+    
+      redirect_to new_publisher_path
+    
+    end
+
   end
   def edit
     @publisher = current_user.publishers.find(params[:id])
@@ -16,6 +23,21 @@ class PublishersController < ApplicationController
     end
   end
 
+  def new
+    @publisher = Publisher.new
+  end
+
+  def create
+    @publisher = current_user.publishers.build(publisher_params)
+    @publisher.user_id = current_user.id
+
+    if @publisher.save
+      redirect_to publishers_path(@publisher), notice: 'Publisher was successfully created.'
+    else
+      render :new
+    end
+  end
+
   def new_press_release
     @publisher = current_user.publishers.find(params[:id])
     @press_release = @publisher.press_releases.build
@@ -25,6 +47,7 @@ class PublishersController < ApplicationController
     @publisher = current_user.publishers.find(params[:id])
     @press_release = @publisher.press_releases.build(press_release_params)
     @press_release.user = current_user
+    @press_release.publisher = @publisher
     if @press_release.save
       redirect_to publishers_path, notice: 'Press Release created successfully.'
     else
@@ -39,6 +62,6 @@ class PublishersController < ApplicationController
   end
 
   def press_release_params
-    params.require(:press_release).permit(:title, :content, :publish_date)
+    params.require(:press_release).permit(:title, :content, :publish_date, :organization_id)
   end
 end

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index]
   resources :organizations, only: [:index, :edit, :update, :new, :create]
-  resources :publishers, only: [:index, :edit, :update] do
+  resources :publishers, only: [:index, :edit, :update, :new, :create] do
     member do
       get 'new_press_release'
       post 'create_press_release'
