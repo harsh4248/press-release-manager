@@ -52,11 +52,19 @@ class PublishersController < ApplicationController
     @press_release.user = current_user
     @press_release.publisher = @publisher
     if @press_release.save
-      redirect_to publishers_path, notice: 'Press Release created successfully.'
+      respond_to do |format|
+        format.html { redirect_to publishers_path, notice: 'Press Release was successfully created.' }
+        format.turbo_stream
+      end
+      # redirect_to publishers_path, notice: 'Press Release created successfully.'
     else
       render :new_press_release
     end
   end
+
+  # def update_press_release
+    
+  # end
 
   private
 

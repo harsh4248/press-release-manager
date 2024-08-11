@@ -37,6 +37,9 @@ gem 'bcrypt', '~> 3.1.7'
 #devise for authentication
 gem 'devise'
 
+#for hotwire realtime updates using steams.
+gem 'hotwire-rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

@@ -7,11 +7,12 @@
 
 <h2>Press Releases</h2>
 <%= link_to 'New Press Release', new_press_release_publisher_path(@publisher) %>
-<% @press_releases.each do |press_release| %>
-  <div>
-    <h3><%= press_release.title %></h3>
-    <p><%= press_release.content %></p>
-    <p><strong>Published on:</strong> <%= press_release.publish_date %></p>
-  </div>
-<% end %>
+
+<div id="press_releases">
+  <%= turbo_frame_tag "press_releases" do %>
+    <% @publisher.press_releases.each do |press_release| %>
+      <%= render partial: "publishers/press_release", locals: { press_release: press_release } %>
+    <% end %>
+  <% end %>
+</div>
 
