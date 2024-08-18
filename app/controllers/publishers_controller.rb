@@ -41,29 +41,54 @@ class PublishersController < ApplicationController
     end
   end
 
-  def new_press_release
-    @publisher = current_user.publishers.find(params[:id])
-    @press_release = @publisher.press_releases.build
-  end
+  # def new_press_release
+  #   @publisher = current_user.publishers.first
+  #   @press_release = @publisher.press_releases.build
+  # end
 
-  def create_press_release
-    @publisher = current_user.publishers.find(params[:id])
-    @press_release = @publisher.press_releases.build(press_release_params)
-    @press_release.user = current_user
-    @press_release.publisher = @publisher
-    if @press_release.save
-      respond_to do |format|
-        format.html { redirect_to publishers_path, notice: 'Press Release was successfully created.' }
-        format.turbo_stream
-      end
-      # redirect_to publishers_path, notice: 'Press Release created successfully.'
-    else
-      render :new_press_release
-    end
-  end
+  # def create_press_release
+  #   @publisher = current_user.publishers.first
+  #   @press_release = @publisher.press_releases.build(press_release_params)
+  #   @press_release.user = current_user
+  #   @press_release.publisher = @publisher
+  #   if @press_release.save
+  #     respond_to do |format|
+  #       format.html { redirect_to publishers_path, notice: 'Press Release was successfully created.' }
+  #       format.turbo_stream
+  #     end
+  #     # redirect_to publishers_path, notice: 'Press Release created successfully.'
+  #   else
+  #     render :new_press_release
+  #   end
+  # end
+
+  # def edit_press_release
+  #   @publisher = current_user.publishers.first
+  #   @press_release = @publisher.press_releases.find(params[:press_release_id])
+  # end
 
   # def update_press_release
-    
+  #   @publisher = current_user.publishers.first
+  #   @press_release = @publisher.press_releases.find(params[:press_release_id])
+  #   if @press_release.update(press_release_params)
+  #     respond_to do |format|
+  #       format.html { redirect_to publishers_path, notice: 'Press Release was successfully updated.' }
+  #       format.turbo_stream
+  #     end
+  #   else
+  #     render :edit_press_release
+  #   end 
+  # end
+
+  # def destroy_press_release
+  #   @publisher = current_user.publishers.first
+  #   @press_release = @publisher.press_releases.find(params[:press_release_id])
+  #   @press_release.destroy
+  #   respond_to do |val|
+  #     val.html { redirect_to publishers_path, notice: 'Press Release was successfully deleted.' }
+  #     val.turbo_stream
+  #     val.any { head :no_content } 
+  #   end
   # end
 
   private

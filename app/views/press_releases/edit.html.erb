@@ -1,9 +1,9 @@
-<h1>Create New Press Release</h1>
+<h1>Edit Press Release</h1>
 
-<%= form_with(model: [@publisher, @press_release], url: create_press_release_path(@publisher), local: true, data: { turbo: false }) do |form| %>
+<%= form_with(model: [@publisher, @press_release], method: :patch, local: true, data: { turbo: false }) do |form| %>
   <% if @press_release.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@press_release.errors.count, "error") %> prohibited this press release from being saved:</h2>
+      <h2><%= pluralize(@press_release.errors.count, "error") %> prohibited this press release from being updated:</h2>
       <ul>
         <% @press_release.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -33,7 +33,7 @@
   </div>
 
   <div class="actions">
-    <%= form.submit "Create Press Release" %>
+    <%= form.submit "Update Press Release" %>
   </div>
 <% end %>
 

@@ -1,6 +1,6 @@
 <h1>Create New Press Release</h1>
 
-<%= form_with(model: [@publisher, @press_release], url: create_press_release_path(@publisher), local: true, data: { turbo: false }) do |form| %>
+<%= form_with(model: [@publisher, @press_release], local: true, data: { turbo: false }) do |form| %>
   <% if @press_release.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@press_release.errors.count, "error") %> prohibited this press release from being saved:</h2>
@@ -38,3 +38,4 @@
 <% end %>
 
 <%= link_to 'Back to Publisher', publishers_path %>
+

@@ -4,7 +4,7 @@
 <div id="press_releases">
   <%= turbo_frame_tag "press_releases" do %>
     <% @press_releases.each do |press_release| %>
-      <%= render partial: "publishers/press_release", locals: { press_release: press_release } %>
+      <%= render partial: "press_releases/press_release", locals: { press_release: press_release } %>
     <% end %>
   <% end %>
 </div>

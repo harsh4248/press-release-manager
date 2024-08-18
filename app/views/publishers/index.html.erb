@@ -6,12 +6,12 @@
 <%= link_to 'Edit', edit_publisher_path(@publisher) %>
 
 <h2>Press Releases</h2>
-<%= link_to 'New Press Release', new_press_release_publisher_path(@publisher) %>
+<%= link_to 'New Press Release', new_publisher_press_release_path(@publisher) %>
 
 <div id="press_releases">
   <%= turbo_frame_tag "press_releases" do %>
     <% @publisher.press_releases.each do |press_release| %>
-      <%= render partial: "publishers/press_release", locals: { press_release: press_release } %>
+      <%= render partial: "press_releases/press_release", locals: { press_release: press_release } %>
     <% end %>
   <% end %>
 </div>

@@ -1,0 +1,12 @@
+<div id="press_release_<%= press_release.id %>">
+  <h3><%= press_release.title %></h3>
+  <p><%= press_release.content %></p>
+  <p><strong>Published on:</strong> <%= press_release.publish_date %></p>
+  <p><strong>Organization:</strong> <%= press_release.organization.name %></p>
+
+
+ 
+    <%= link_to 'Edit', edit_publisher_press_release_path(publisher_id: press_release.publisher_id, id: press_release.id), method: :get, data: { turbo: false } %>
+    <%= button_to 'Delete', publisher_press_release_path(publisher_id: press_release.publisher_id, id: press_release.id), method: :delete %>
+
+</div>

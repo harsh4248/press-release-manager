@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'press_releases/new'
+  get 'press_releases/create'
+  get 'press_releases/edit'
+  get 'press_releases/update'
+  get 'press_releases/destroy'
   get 'organization/new'
   get 'organization/create'
   # get 'publishers/index'
@@ -14,11 +19,13 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index]
   resources :organizations, only: [:index, :edit, :update, :new, :create]
-  resources :publishers, only: [:index, :edit, :update, :new, :create] do
-    member do
-      get 'new_press_release'
-      post 'create_press_release'
-    end
+  resources :publishers, only: [:index, :edit, :update, :new, :create] do 
+      resources :press_releases, only: [:new, :create, :edit, :update, :destroy]
+      # get 'new_press_release'
+      # post 'create_press_release'
+      # get  'edit_press_release'
+      # patch 'update_press_release'
+      # delete 'destroy_press_release'
   end
 
   root to: 'home#index'
